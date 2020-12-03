@@ -1,3 +1,5 @@
+import random
+
 
 def data():
     l = int(input('Введите длину сообщения: '))
@@ -19,10 +21,12 @@ def div_c(gx, mx):
     return cx
 
 
-def enc(mx, r, cx, e):
-    a = mx << r + cx
-    b = a ^ e
-    return a, b
+def binaryGenerator(l, r):
+    e = []
+    n = l + r
+    for i in range(0, n):
+        e = random.randint(0, 100)
+    return e
 
 
 def div_s(b, gx):
@@ -36,15 +40,24 @@ def div_s(b, gx):
     return sx
 
 
+def enc(mx, r, cx, e):
+    a = mx << r + cx
+    b = a ^ e
+    return a, b
+
+
 def main():
-    gx = int(input('Введите порождающий многочлен: '))
+    gx = (input('Введите порождающий многочлен: '))[::-1]
+    gx = int(gx, 2)
     l, k, m = data()
-    r = len(bin(gx))-1
-    e = int(input('Введите вектор ошибки: '))
+    r = len(str(gx)) - 1
     mx = m << r
+    print("{0:b}".format(mx))
     cx = div_c(gx, mx)
-    p = 0, 1
     ax = (mx << r) + cx
+    print("{0:b}".format(ax))
+    e = binaryGenerator(l, r)
+    print("{0:b}".format(e))
     b = ax ^ e
     sx = div_s(b, gx)
     if sx == 0 and e != 0:

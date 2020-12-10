@@ -10,12 +10,14 @@ def data():
 
 def div_c(gx, mx):
     r = len(bin(gx)) - 1
-    if len(bin(mx)) < len(bin(gx)):
+    xg = len(bin(gx))
+    xmx = len(bin(mx))
+    if xg < xmx:
         return mx
-    tmp = gx << len(bin(mx)) - len(bin(gx))
+    tmp = gx << xmx - xg
     cx = mx ^ tmp
-    while len(bin(cx)) >= len(bin(gx)):
-        tmp = gx << len(bin(cx)) - len(bin(gx))
+    while len(bin(cx)) >= xg:
+        tmp = gx << len(bin(cx)) - xg
         cx = cx ^ gx
         print('c ='.format(bin(cx)))
     return cx
@@ -30,12 +32,14 @@ def binaryGenerator(l, r):
 
 
 def div_s(b, gx):
-    if len(bin(b)) < len(bin(gx)):
+    xb = len(bin(b))
+    xg = len(bin(gx))
+    if xb < xg:
         return b
-    tmp = gx << len(bin(b)) - len(bin(gx))
+    tmp = gx << xb - xg
     sx = b ^ tmp
-    while len(bin(sx)) >= len(bin(gx)):
-        tmp = gx << len(bin(sx)) - len(bin(gx))
+    while len(bin(sx)) >= xg:
+        tmp = gx << len(bin(sx)) - xg
         sx = sx ^ gx
     return sx
 

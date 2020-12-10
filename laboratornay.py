@@ -14,7 +14,7 @@ def div_c(gx, mx):
     xmx = len(bin(mx))
     if xg < xmx:
         return mx
-    tmp = gx << xmx - xg
+    tmp = gx << (xmx - xg)
     cx = mx ^ tmp
     while len(bin(cx)) >= xg:
         tmp = gx << len(bin(cx)) - xg
@@ -36,7 +36,7 @@ def div_s(b, gx):
     xg = len(bin(gx))
     if xb < xg:
         return b
-    tmp = gx << xb - xg
+    tmp = gx << (xb - xg)
     sx = b ^ tmp
     while len(bin(sx)) >= xg:
         tmp = gx << len(bin(sx)) - xg

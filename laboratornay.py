@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 
 def data():
@@ -19,16 +20,7 @@ def div_c(gx, mx):
     while len(bin(cx)) >= xg:
         tmp = gx << len(bin(cx)) - xg
         cx = cx ^ gx
-        print('c ='.format(bin(cx)))
     return cx
-
-
-def binaryGenerator(l, r):
-    e = []
-    n = l + r
-    for i in range(0, n):
-        e = random.randint(16, 31)
-    return e
 
 
 def div_s(b, gx):
@@ -44,28 +36,23 @@ def div_s(b, gx):
     return sx
 
 
-def enc(mx, r, cx, e):
-    a = mx << r + cx
-    b = a ^ e
-    return a, b
-
-
 def main():
     gx = (input('Введите порождающий многочлен: '))[::-1]
     gx = int(gx, 2)
     l, k, m = data()
     r = len(str(gx)) - 1
     mx = m << r
-    print('m(x) = ', "{0:b}".format(mx))
+    print('m(x) = ', format(mx, '07b'))
     cx = div_c(gx, mx)
     ax = (mx << r) + cx
-    print('a(x) = ',"{0:b}".format(ax))
-    e = binaryGenerator(l, r)
-    print('e(x) = ',"{0:b}".format(e))
+    print('a(x) = ',  format(ax, '07b'))
+    e = random.getrandbits(l)
+    print('e(x) = ', format(e, '07b'))
     b = ax ^ e
-    print('b(x) = ', "{0:b}".format(b))
+    print('b(x) = ', format(b, '07b'))
     sx = div_s(b, gx)
-    if sx == 0 and e != 0:
+    print('s(x) = ', sx)
+    if sx == 0:
         print('Ошибок не обнаружено')
     else:
         print('Ошибка обнаружена')

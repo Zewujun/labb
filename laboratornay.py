@@ -1,12 +1,10 @@
 import random
-import numpy as np
 
 
 def data():
-    l = int(input('Введите длину сообщения: '))
     k = (input('Введите число k: '))
     m = int(input('Введите сообщение: '))
-    return l, k, m
+    return k, m
 
 
 def div_c(gx, mx):
@@ -39,10 +37,11 @@ def div_s(b, gx):
 def main():
     gx = (input('Введите порождающий многочлен: '))[::-1]
     gx = int(gx, 2)
-    l, k, m = data()
+    k, m = data()
     r = len(str(gx)) - 1
     mx = m << r
     print('m(x) = ', format(mx, '07b'))
+    l = len(bin(mx))
     cx = div_c(gx, mx)
     ax = (mx << r) + cx
     print('a(x) = ',  format(ax, '07b'))
@@ -51,7 +50,6 @@ def main():
     b = ax ^ e
     print('b(x) = ', format(b, '07b'))
     sx = div_s(b, gx)
-    print('s(x) = ', sx)
     if sx == 0:
         print('Ошибок не обнаружено')
     else:
